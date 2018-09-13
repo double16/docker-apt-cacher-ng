@@ -24,8 +24,9 @@ create_cache_dir
 create_log_dir
 
 # Populate mirrors
-curl 'https://www.centos.org/download/full-mirrorlist.csv' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/centos_mirrors
-curl 'https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=x86_64' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
+curl -s 'https://www.centos.org/download/full-mirrorlist.csv' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/centos_mirrors
+curl -sL 'https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=x86_64' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
+for R in epel-5 epel-6 epel-7; do curl -sL "http://mirrors.fedoraproject.org/metalink?repo=${R}&arch=x86_64"; done | grep "<url" | sed -e "s/^.*>\(.*\)<.*>/\1/" | grep '^http' | rev | cut -d "/" -f 5- | rev | sort -u | uniq > /etc/apt-cacher-ng/epel_mirrors
 
 # allow arguments to be passed to apt-cacher-ng
 if [[ ${1:0:1} = '-' ]]; then
