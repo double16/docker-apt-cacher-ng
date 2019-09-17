@@ -1,8 +1,8 @@
-FROM ubuntu:bionic-20180526
+FROM ubuntu:disco-20190809
 
-LABEL maintainer="sameer@damagehead.com"
+LABEL maintainer="pat@patdouble.com"
 
-ENV APT_CACHER_NG_VERSION=3.1 \
+ENV APT_CACHER_NG_VERSION=3.2 \
     APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng
