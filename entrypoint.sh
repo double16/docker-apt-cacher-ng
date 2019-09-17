@@ -25,7 +25,11 @@ create_log_dir
 
 # Populate mirrors
 curl -s 'https://www.centos.org/download/full-mirrorlist.csv' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/centos_mirrors
-for R in 28 29 30; do curl -sL "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-${R}&arch=x86_64"; done | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
+
+for R in 28 29 30; do curl -sL "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-${R}&arch=x86_64"; done | sed 's/^.*"http:/http:/' | sed 's/".*$//' | sed 's:os/$::' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
+cat /etc/apt-cacher-ng/fedora_mirrors | grep -F '/releases/' | sed 's:/releases/:/updates/:' > /tmp/fedora_updates
+cat /tmp/fedora_updates >> /etc/apt-cacher-ng/fedora_mirrors
+
 for R in epel-5 epel-6 epel-7; do curl -sL "http://mirrors.fedoraproject.org/metalink?repo=${R}&arch=x86_64"; done | grep "<url" | sed -e "s/^.*>\(.*\)<.*>/\1/" | grep '^http' | rev | cut -d "/" -f 5- | rev | sort -u | uniq > /etc/apt-cacher-ng/epel_mirrors
 
 # allow arguments to be passed to apt-cacher-ng
