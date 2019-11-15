@@ -3,7 +3,7 @@ version: '2.2'
 services:
   apt-cacher-ng:
     restart: always
-    image: pdouble16/apt-cacher-ng:latest
+    image: pdouble16/docker-apt-cacher-ng:latest
     init: true
     ports:
     - "3142:3142"

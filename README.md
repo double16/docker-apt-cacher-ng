@@ -1,7 +1,6 @@
-[![Circle CI](https://circleci.com/gh/sameersbn/docker-apt-cacher-ng.svg?style=shield)](https://circleci.com/gh/sameersbn/docker-apt-cacher-ng) [![Docker Repository on Quay.io](https://quay.io/repository/sameersbn/apt-cacher-ng/status "Docker Repository on Quay.io")](https://quay.io/repository/sameersbn/apt-cacher-ng)
+# pdouble16/docker-apt-cacher-ng:3.2-1
 
-# sameersbn/apt-cacher-ng:3.1-1
-
+- [pdouble16/docker-apt-cacher-ng:3.2-1](#pdouble16docker-apt-cacher-ng32-1)
 - [Introduction](#introduction)
   - [Contributing](#contributing)
   - [Issues](#issues)
