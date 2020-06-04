@@ -1,8 +1,8 @@
-FROM ubuntu:disco-20190809
+FROM ubuntu:focal-20200423
 
 LABEL maintainer="pat@patdouble.com"
 
-ENV APT_CACHER_NG_VERSION=3.2 \
+ENV APT_CACHER_NG_VERSION=3.3.1 \
     APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng \
@@ -28,5 +28,7 @@ RUN apt-get update \
 EXPOSE 3142/tcp
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
+
+HEALTHCHECK --interval=60s --timeout=30s --start-period=5s --retries=3 CMD [ "/usr/bin/curl", "-s", "-f", "-o", "/dev/null", "http://localhost:3142/acng-report.html" ]
 
 CMD ["/usr/sbin/apt-cacher-ng"]

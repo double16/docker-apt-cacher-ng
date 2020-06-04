@@ -26,7 +26,7 @@ create_log_dir
 # Populate mirrors
 curl -s 'https://www.centos.org/download/full-mirrorlist.csv' | sed 's/^.*"http:/http:/' | sed 's/".*$//' | grep ^http >/etc/apt-cacher-ng/centos_mirrors
 
-for R in 28 29 30 31; do curl -sL "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-${R}&arch=x86_64"; done | sed 's/^.*"http:/http:/' | sed 's/".*$//' | sed 's:os/$::' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
+for R in 28 29 30 31 32; do curl -sL "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-${R}&arch=x86_64"; done | sed 's/^.*"http:/http:/' | sed 's/".*$//' | sed 's:os/$::' | grep ^http >/etc/apt-cacher-ng/fedora_mirrors
 cat /etc/apt-cacher-ng/fedora_mirrors | grep -F '/releases/' | sed 's:/releases/:/updates/:' > /tmp/fedora_updates
 cat /tmp/fedora_updates >> /etc/apt-cacher-ng/fedora_mirrors
 

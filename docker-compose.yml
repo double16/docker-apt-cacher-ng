@@ -1,11 +1,13 @@
-version: '2.2'
+version: '3.3'
+
+volumes:
+  aptcache:
 
 services:
-  apt-cacher-ng:
-    restart: always
+  aptcache:
     image: pdouble16/docker-apt-cacher-ng:latest
-    init: true
+    restart: always
     ports:
-    - "3142:3142"
+      - "3142"
     volumes:
-    - /srv/docker/apt-cacher-ng:/var/cache/apt-cacher-ng
+      - aptcache:/var/cache/apt-cacher-ng
